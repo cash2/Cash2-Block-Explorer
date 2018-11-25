@@ -1,10 +1,22 @@
-# Karbowanec-Blockchain-Explorer
-Block explorer for Karbowanec CryptoNote based cryptocurrency.
+# Cash2 Blockchain Explorer
 
-#### Installation
+https://blocks.cash2.org
 
-1) It takes data from daemon karbowanecd. It should be accessible from the Internet. Run karbowanecd with open port as follows:
-```bash
-./karbowanecd --restricted-rpc --enable-cors=* --enable-blockchain-indexes --rpc-bind-ip=0.0.0.0 --rpc-bind-port=32348
-```
-2) Just upload to your website and change 'api' variable in config.js to point to your daemon.
+## Installation
+
+1) Run cash2d  
+`./cash2d --restricted-rpc --enable-cors=* --rpc-bind-ip=0.0.0.0 --rpc-bind-port=12276`
+
+2) Host your website and change 'api' variable in config.js to point to your server.
+
+Credits
+---------
+
+* [fancoder](//github.com/fancoder) - Developper on cryptonote-universal-pool project.
+* [Karbovanets](//github.com/Karbovanets) - Karbowanec-Blockchain-Explorer project from which current project is forked.
+
+License
+-------
+Released under the GNU General Public License v3
+
+http://www.gnu.org/licenses/gpl-3.0.html
