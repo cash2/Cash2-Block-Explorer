@@ -4,7 +4,7 @@ https://blocks.cash2.org
 
 ## Installation
 
-1) run cash2d
+1) run cash2d  
 `./cash2d --restricted-rpc --enable-cors=* --rpc-bind-ip=0.0.0.0 --rpc-bind-port=12276`
 
 2) Host your website and change 'api' variable in config.js to point to your server.
