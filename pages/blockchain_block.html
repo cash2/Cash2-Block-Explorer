@@ -1,9 +1,9 @@
-<br/>
-
-<h2>Block</h2>
+<h3 class="bold dark col-centered">Block</h3>
 
 <br/>
+<br/>
 
+<p>Hash</p>
 <p id="block.hash" style="word-break: break-all;"></p>
 
 <br/>
@@ -20,17 +20,13 @@
         <td id="block.timestamp"></td>
       </tr>
       <tr>
-        <td>Version</td>
-        <td id="block.version"></td>
-      </tr>
-      <tr>
         <td>Difficulty</td>
         <td id="block.difficulty"></td>
       </tr>
-      <tr>
-        <td>Orphaned</td>
-        <td id="block.orphan"></td>
-      </tr>
+      <!-- <tr> -->
+        <!-- <td>Orphaned</td> -->
+        <!-- <td id="block.orphan"></td> -->
+      <!-- </tr> -->
       <tr>
         <td>Transactions</td>
         <td id="block.transactions"></td>
@@ -51,10 +47,10 @@
         <td>Coinbase reward</td>
         <td id="block.baseReward"></td>
       </tr>
-      <tr>
-        <td>Transaction fees</td>
-        <td id="block.transactionsFee"></td>
-      </tr>
+      <!-- <tr> -->
+        <!-- <td>Transaction fees</td> -->
+        <!-- <td id="block.transactionsFee"></td> -->
+      <!-- </tr> -->
       <tr>
         <td>Block Reward</td>
         <td id="block.reward"></td>
@@ -83,18 +79,19 @@
 <br/>
 <br/>
 
-<h3 class="transactions"><i class="fa fa-exchange fa-fw" aria-hidden="true"></i> Тransactions</h3>
+<h3 class="bold dark col-centered">Тransactions</h3>
 
+<br/>
 <br/>
 
 <div class="table-responsive">
   <table class="table">
     <thead>
       <tr>
-        <th><i class="fa fa-paw"></i> Hash</th>
-        <th><i class="fa fa-percent"></i> Fee</th>
-        <th><i class="fa fa-money"></i> Total Amount</th>
-        <th><i class="fa fa-arrows"></i> Size</th>
+        <th><i class="fa fa-paw"></i>Hash</th>
+        <!-- <th><i class="fa fa-percent"></i> Fee</th> -->
+        <th><i class="fa fa-money"></i>Amount</th>
+        <th><i class="fa fa-arrows"></i>Size</th>
       </tr>
     </thead>
     <tbody id="transactions_rows"></tbody>
@@ -102,6 +99,8 @@
 </div>
 
 <script>
+  var CASH2_HARD_FORK_HEIGHT_2 = 420016;                                 
+
   var block, xhrGetBlock;
 
   currentPage = {
@@ -148,6 +147,9 @@
         cache: 'false',
         success: function(data) {
           block = data.result.block;
+
+          // console.log(block);
+
           renderBlock(block);
         }
       });
@@ -160,9 +162,17 @@
     updateText('block.hash', block.hash);
     updateText('block.height', getReadableBlockHeight(block.height));
     updateText('block.timestamp', formatDate(block.timestamp));
-    updateText('block.version', block.major_version + '.' + block.minor_version);
-    updateText('block.difficulty', getReadableDifficultyString(block.difficulty, 2).toString());
-    updateText('block.orphan', block.orphan_status ? "Yes" : "No");
+    // updateText('block.version', block.major_version + '.' + block.minor_version);
+
+    var blockDifficulty = block.difficulty;
+
+    if (block.height >= CASH2_HARD_FORK_HEIGHT_2)
+    {
+      blockDifficulty = block.difficulty * 1099511627776;
+    }
+
+    updateText('block.difficulty', getReadableDifficultyString(blockDifficulty, 2).toString());
+    // updateText('block.orphan', block.orphan_status ? "Yes" : "No");
     updateText('block.transactions', block.transactions.length);
     updateText('block.transactionsSize', formatBytes(parseInt(block.transactionsCumulativeSize)));
     updateText('block.blockSize', formatBytes(parseInt(block.blockSize)));
@@ -170,7 +180,7 @@
     updateText('block.effectiveTxsMedian', formatBytes(parseInt(block.effectiveSizeMedian)));
     updateText('block.rewardPenalty', block.penalty*100 + "%");
     updateText('block.baseReward', getReadableCoins(block.baseReward));
-    updateText('block.transactionsFee', getReadableCoins(block.totalFeeAmount));
+    // updateText('block.transactionsFee', getReadableCoins(block.totalFeeAmount));
     updateText('block.reward', getReadableCoins(block.reward));
     updateText('block.totalCoins', getReadableCoins(block.alreadyGeneratedCoins));
     updateText('block.totalTransactions', block.alreadyGeneratedTransactions);
@@ -210,8 +220,8 @@
   function getTransactionCells(transaction)
   {
     return '<td>' + formatPaymentLink(transaction.hash) + '</td>' +
-           '<td>' + getReadableCoins(transaction.fee, 8, true) + '</td>' +
-           '<td>' + getReadableCoins(transaction.amount_out, 8, true) + '</td>' +
+           // '<td>' + getReadableCoins(transaction.fee, 8, true) + '</td>' +
+           '<td>' + getReadableCoins(transaction.amount_out, 9, true) + ' cash2</td>' +
            '<td>' + formatBytes(parseInt(transaction.size)) + '</td>';
   }
 
