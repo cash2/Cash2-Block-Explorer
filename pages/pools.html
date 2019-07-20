@@ -740,7 +740,7 @@
       data: JSON.stringify({
         jsonrpc:"2.0",
         id: "test",
-        method:"f_blocks_list_json",
+        method:"get_blocks",
         params: {
           height: lastStats.height - 1
         }
@@ -792,7 +792,7 @@
       data: JSON.stringify({
         jsonrpc:"2.0",
         id: "test",
-        method:"getlastblockheader",
+        method:"get_last_block_header",
         params: {}
       }),
       dataType: 'json',
@@ -805,7 +805,7 @@
           data: JSON.stringify({
             jsonrpc:"2.0",
             id: "test",
-            method:"f_block_json",
+            method:"get_block",
             params: {
                 hash: last_block_hash
             }

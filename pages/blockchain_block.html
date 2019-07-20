@@ -138,7 +138,7 @@
         data: JSON.stringify({
           jsonrpc:"2.0",
           id: "test",
-          method:"f_block_json",
+          method:"get_block",
           params: {
             hash: urlParam('hash')
           }
@@ -194,7 +194,7 @@
       data: JSON.stringify({
       jsonrpc: "2.0",
       id: "test",
-      method: "getblockheaderbyheight",
+      method: "get_block_header_by_height",
       params: {
         height: (block.height + 1)
       }

@@ -364,7 +364,7 @@
       data: JSON.stringify({
         jsonrpc:"2.0",
         id: "test",
-        method:"getlastblockheader",
+        method:"get_last_block_header",
         params: {}
       }),
       dataType: 'json',
@@ -377,7 +377,7 @@
           data: JSON.stringify({
             jsonrpc:"2.0",
             id: "test",
-            method:"f_block_json",
+            method:"get_block",
             params: {
                 hash: last_block_hash
             }
@@ -408,7 +408,7 @@
       data: JSON.stringify({
         jsonrpc:"2.0",
         id: "test",
-        method:"f_blocks_list_json",
+        method:"get_blocks",
         params: {
             height: $('#blocks_rows').children().last().data('height')
         }
@@ -443,7 +443,7 @@
       data: JSON.stringify({
         jsonrpc:"2.0",
         id: "test",
-        method:"f_blocks_list_json",
+        method:"get_blocks",
         params: {
           height: openHeight
         }
@@ -491,7 +491,7 @@
       data: JSON.stringify({
         jsonrpc:"2.0",
         id: "test",
-        method:"f_blocks_list_json",
+        method:"get_blocks",
         params: {
             height: openHeight
         }
@@ -565,7 +565,7 @@
       data: JSON.stringify({
         jsonrpc:"2.0",
         id: "test",
-        method:"f_blocks_list_json",
+        method:"get_blocks",
         params: {
           height: loadHeight
         }
@@ -691,7 +691,7 @@
       data: JSON.stringify({
         jsonrpc: "2.0",
         id: "test",
-        method: "f_mempool_json",
+        method: "get_mempool",
         params: {}
       }),
       dataType: 'json',
@@ -1071,7 +1071,7 @@
 			data: JSON.stringify({
 				jsonrpc:"2.0",
 				id: "test",
-				method:"f_transaction_json",
+				method:"get_transaction",
 				params: {
 					hash: transactionHash.val()
 				}
@@ -1110,7 +1110,7 @@
 			data: JSON.stringify({
 				jsonrpc:"2.0",
 				id: "test",
-				method:"check_tx_key",
+				method:"check_payment",
 				params: {
 					txid: transactionHash.val(),
 					txkey: privateKey.val(),

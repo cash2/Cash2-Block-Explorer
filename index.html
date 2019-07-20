@@ -491,7 +491,7 @@
   function fetchLiveStats()
   {
     $.ajax({
-      url: api + '/getinfo',
+      url: api + '/get_info',
       dataType: 'json',
       type: 'GET',
       cache: 'false'
@@ -581,7 +581,7 @@
   }
 
   $(function() {
-    $.get(api + '/getinfo', function(data) {
+    $.get(api + '/get_info', function(data) {
       try
       {
         lastStats = JSON.parse(data);
@@ -637,7 +637,7 @@ $('#btn_search').click(function(e) {
       data: JSON.stringify({
         jsonrpc:"2.0",
         id: "blockbyheight",
-        method:"getblockheaderbyheight",
+        method:"get_block_header_by_height",
         params: {
            height: parseInt(text)
         }
@@ -672,7 +672,7 @@ $('#btn_search').click(function(e) {
       data: JSON.stringify({
         jsonrpc:"2.0",
         id: "GetSearchBlock",
-        method:"f_block_json",
+        method:"get_block",
         params: {
            hash: text
         }
@@ -694,7 +694,7 @@ $('#btn_search').click(function(e) {
             data: JSON.stringify({
               jsonrpc:"2.0",
               id: "test",
-              method:"f_transaction_json",
+              method:"get_transaction",
               params: {
                 hash: text
               }
@@ -715,7 +715,7 @@ $('#btn_search').click(function(e) {
                   data: JSON.stringify({
                     jsonrpc:"2.0",
                     id: "test",
-                    method:"k_transactions_by_payment_id",
+                    method:"get_transactions_by_payment_id",
                     params: {
                       payment_id: text
                     }
@@ -877,7 +877,7 @@ $('#txt_search').keyup(function(e) {
 			data: JSON.stringify({
 				jsonrpc:"2.0",
 				id: "test",
-				method:"f_transaction_json",
+				method:"get_transaction",
 				params: {
 					hash: transactionHash.val()
 				}
@@ -919,7 +919,7 @@ $('#txt_search').keyup(function(e) {
 			data: JSON.stringify({
 				jsonrpc:"2.0",
 				id: "test",
-				method:"check_tx_key",
+				method:"check_payment",
 				params: {
 					txid: transactionHash.val(),
 					txkey: privateKey.val(),

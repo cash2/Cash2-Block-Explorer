@@ -159,7 +159,7 @@
 			data: JSON.stringify({
 				jsonrpc:"2.0",
 				id: "test",
-				method:"f_transaction_json",
+				method:"get_transaction",
 				params: {
 					hash: transactionHash.val()
 				}
@@ -192,55 +192,10 @@
 			data: JSON.stringify({
 				jsonrpc:"2.0",
 				id: "test",
-				method:"check_tx_key",
+				method:"check_payment",
 				params: {
 					txid: transactionHash.val(),
 					txkey: privateKey.val(),
-					address: publicAddress.val()
-				}
-			}),
-			dataType: 'json',
-			cache: 'false',
-			success: function(data){
-			  if (data.error) {
-				wrongParamAlert(data.error.message);
-			  } else {
-				var result = data.result;
-				$("#receivedAmount").html(getReadableCoins(result.amount,12));
-				
-				var outputResults = result.outputs;
-				for (var i = 0; i < outputResults.length; i++){
-					$('#outputs_rows tr').each(function() {
-						$this = $(this);
-						if ($this.attr('data-k_image') === outputResults[i].target.data.key) {
-							$this.addClass("success");
-						}
-					});				
-				}
-				$("#check_result").show();
-			  }
-			}
-		});
-	}
-	
-	function checkViewKey(){
-		// in case some one will try to use tracking key from GUI extract private view key from it
-		var privateViewKey = privateKey.val();
-		if (privateViewKey.length === 256) {
-			privateViewKey = privateViewKey.substr(privateViewKey.length - 64);
-		}
-	
-		if (xhrCheckTransactionByViewKey) xhrCheckTransactionByViewKey.abort();
-		xhrCheckTransactionByViewKey = $.ajax({
-			url: api + '/json_rpc',
-			method: "POST",
-			data: JSON.stringify({
-				jsonrpc:"2.0",
-				id: "test",
-				method:"check_tx_with_view_key",
-				params: {
-					txid: transactionHash.val(),
-					view_key: privateViewKey,
 					address: publicAddress.val()
 				}
 			}),
