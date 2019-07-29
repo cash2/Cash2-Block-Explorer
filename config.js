@@ -1,6 +1,6 @@
 var api = 'https://blocks.cash2.org:8080';
-var blockTargetInterval = 60;
-var coinUnits = 100000000;
+var blockTargetInterval = 9;
+var coinUnits = 1000000000;
 var symbol = 'CASH2';
 var refreshDelay = 60000;
 // pools stats by MainCoins

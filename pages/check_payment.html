@@ -118,23 +118,26 @@
 <p>You can also check that payment was made to your address in given transaction with your <em>Private View Key</em>. Alternatively the <em>Tracking Key</em> from GUI wallet can be used.</p>
 
 <script>
+  // check_payment.html
+
   var xhrGetTransaction, xhrCheckTransactionByKey, xhrCheckTransactionByViewKey, transaction;
 	var transactionHash = $("#transaction_hash");
 	var privateKey = $("#private_key");
 	var publicAddress = $("#public_address");
 	var privateKeyType;
 
-    currentPage = {
-        destroy: function(){
-			if (xhrGetTransaction) xhrGetTransaction.abort();
-			if (xhrCheckTransactionByKey) xhrCheckTransactionByKey.abort();
-			if (xhrCheckTransactionByViewKey) xhrCheckTransactionByViewKey.abort();
-        },
-        init: function(){
-        },
-        update: function(){
-        }
-    };
+  currentPage = {
+      destroy: function(){
+    if (xhrGetTransaction) xhrGetTransaction.abort();
+    if (xhrCheckTransactionByKey) xhrCheckTransactionByKey.abort();
+    if (xhrCheckTransactionByViewKey) xhrCheckTransactionByViewKey.abort();
+      },
+      init: function(){
+      },
+      update: function(){
+      }
+  };
+
 	$("#check_result").hide();
 	
 	$("#check_transaction").click(function() {
@@ -143,6 +146,7 @@
 		$('#outputs_rows').empty();
 		$('#receivedAmount').empty();
 		$('#transactionHash').empty();
+
 		privateKeyType = $("[name=keyType]:checked").val();
 		if(!transactionHash.val() || !privateKey.val() || !publicAddress.val()) {
 			wrongParamAlert("Fill all fields!");
@@ -194,9 +198,9 @@
 				id: "test",
 				method:"check_payment",
 				params: {
-					txid: transactionHash.val(),
-					txkey: privateKey.val(),
-					address: publicAddress.val()
+					transaction_id: transactionHash.val(),
+					transaction_private_key: privateKey.val(),
+					receiver_address: publicAddress.val()
 				}
 			}),
 			dataType: 'json',

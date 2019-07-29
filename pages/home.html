@@ -293,7 +293,9 @@
 </div>
 
 <script>
-  var CASH2_HARD_FORK_HEIGHT_2 = 1;
+  // home.html
+
+  var CASH2_HARD_FORK_HEIGHT_2 = 420016;
 
   var block,
   Difficulties = [],
@@ -332,7 +334,7 @@
     update: function() {
       renderLastBlock();
       updateText('networkHeight', lastStats.height.toString());
-      updateText('networkTransactions', lastStats.tx_count.toString());
+      updateText('networkTransactions', lastStats.total_transactions_count.toString());
       updateText('networkHashrate', getReadableHashRateString(lastStats.difficulty / blockTargetInterval));
       updateText('networkDifficulty', getReadableDifficultyString(lastStats.difficulty, 2).toString());
       $("time.timeago").timeago();
@@ -600,7 +602,7 @@
 
     Difficulties.push(parseInt(blockDifficulty));
     Blocks.push(parseInt(block.height));
-    Txses.push(parseInt(block.transactions.length));
+    Txses.push(parseInt(block.transaction_count));
     Sizes.push(parseInt(block.size));
     Timestamps.push(dateTime);
     time_stamps.push(block.timestamp);
@@ -952,8 +954,8 @@
       var row = $(brows[i]);
       var label = row.data("json").height;
       var diff  = row.data("json").difficulty;
-      var txses = row.data("json").tx_count;
-      var size  = row.data("json").cumul_size;
+      var txses = row.data("json").total_transactions_count;
+      var size  = row.data("json").size;
       var time  = row.attr('data-dt');
 
       labels.push(label);
@@ -1014,6 +1016,7 @@
 </script>
 
 <script>
+  // home.html
 
   // Check transaction key
 
@@ -1112,9 +1115,9 @@
 				id: "test",
 				method:"check_payment",
 				params: {
-					txid: transactionHash.val(),
-					txkey: privateKey.val(),
-					address: publicAddress.val()
+					transaction_id: transactionHash.val(),
+					transaction_private_key: privateKey.val(),
+					receiver_address: publicAddress.val()
 				}
 			}),
 			dataType: 'json',
