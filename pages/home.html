@@ -386,9 +386,9 @@
           cache: 'false',
           success: function(data) {
             block = data.result.block;
-            updateText('totalCoins', getReadableCoins(block.alreadyGeneratedCoins, 0));
-            updateText('emissionPercent', (block.alreadyGeneratedCoins / 15000000000000000 * 100).toFixed(2));
-            updateText('currentReward', getReadableCoins(block.baseReward, 9));
+            updateText('totalCoins', getReadableCoins(block.already_generated_coins, 0));
+            updateText('emissionPercent', (block.already_generated_coins / 15000000000000000 * 100).toFixed(2));
+            updateText('currentReward', getReadableCoins(block.base_reward, 9));
           }
         });
       }
@@ -600,8 +600,8 @@
 
     Difficulties.push(parseInt(blockDifficulty));
     Blocks.push(parseInt(block.height));
-    Txses.push(parseInt(block.tx_count));
-    Sizes.push(parseInt(block.cumul_size));
+    Txses.push(parseInt(block.transactions.length));
+    Sizes.push(parseInt(block.size));
     Timestamps.push(dateTime);
     time_stamps.push(block.timestamp);
 
@@ -719,14 +719,14 @@
               
             var row = document.createElement('tr');
             var columns =
-              '<td>' + formatDate(tx.receiveTime) + '</td>' +
+              '<td>' + formatDate(tx.receive_time) + '</td>' +
               '<td>' + getReadableCoins(tx.amount_out, 4, true) + '</td>' +
               // '<td>' + getReadableCoins(tx.fee, 4, true) + '</td>' +
               // '<td>' + formatBytes(parseInt(tx.size)) + '</td>' +
               '<td>' + formatPaymentLink(tx.hash) + '</td>';
             row.innerHTML = columns;
             $(txsRows).append(row);
-            $(row).find('.mtx-ago').timeago('update', new Date(tx.receiveTime * 1000).toISOString());
+            $(row).find('.mtx-ago').timeago('update', new Date(tx.receive_time * 1000).toISOString());
             
             txcount = txcount + 1;
             totalAmount = tx.amount_out + totalAmount;
@@ -1154,9 +1154,9 @@
 	
 	function renderTransaction(transaction)
   {
-    var details = transaction.txDetails;
-    inputs = transaction.tx.vin;
-    outputs = transaction.tx.vout;
+    var details = transaction.transaction_details;
+    inputs = transaction.transaction.vin;
+    outputs = transaction.transaction.vout;
     block = transaction.block;
 
     // updateText('transactionHash', details.hash);

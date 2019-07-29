@@ -517,10 +517,10 @@
     {
       $('#node_connection').html('Online').addClass('text-success').removeClass('text-danger');
       $('#node_height').html(parseInt(lastStats['height']));
-      $('#node_block').html(parseInt(lastStats['last_known_block_index']));
+      $('#node_block').html(parseInt(lastStats['last_known_block_height']));
       $('#node_diff').html(parseInt(lastStats['difficulty']));
-      $('#node_alt').html(parseInt(lastStats['alt_blocks_count']));
-      $('#node_rpc').html(parseInt(lastStats['rpc_connections_count']));
+      $('#node_alt').html(parseInt(lastStats['orphan_blocks_count']));
+      $('#node_rpc').html(parseInt(lastStats['connections_count']));
       $('#node_inc').html(parseInt(lastStats['incoming_connections_count']));
       $('#node_out').html(parseInt(lastStats['outgoing_connections_count']));
       $('#node_white').html(parseInt(lastStats['white_peerlist_size']));

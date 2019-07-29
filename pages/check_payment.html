@@ -224,9 +224,9 @@
 	}
 	
 	function renderTransaction(transaction){
-				var details = transaction.txDetails;
-                inputs = transaction.tx.vin;
-                outputs = transaction.tx.vout;
+				var details = transaction.transaction_details;
+                inputs = transaction.transaction.vin;
+                outputs = transaction.transaction.vout;
                 block = transaction.block;
 				
                 updateText('transactionHash', details.hash);
@@ -241,9 +241,9 @@
                 updateText('transaction.mixin', details.mixin);
                 if (!details.mixin)
                     $('#div_transaction_mixin').hide();
-                updateText('transaction.paymentId', details.paymentId);
-				updateText('transaction.paymentIdDecifer', hex2a(details.paymentId));
-                if (!details.paymentId)
+                updateText('transaction.paymentId', details.payment_id);
+				updateText('transaction.paymentIdDecifer', hex2a(details.payment_id));
+                if (!details.payment_id)
                     $('#div_transaction_paymentId').hide();
                 updateText('transaction.size', formatBytes(parseInt(details.size)));
 
