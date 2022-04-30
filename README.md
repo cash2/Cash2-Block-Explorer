@@ -1,4 +1,4 @@
-# Cash2 Blockchain Explorer
+# Cash2 Blockchain Explorer Website
 
 https://blocks.cash2.org
 

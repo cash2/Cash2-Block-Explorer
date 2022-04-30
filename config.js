@@ -8,6 +8,6 @@ var networkStat =
   {
     "cash2":
       [
-        ["pool1.cash2.org", "https://pool1.cash2.org:8119/stats"]
+        ["pool.cash2.org", "https://pool.cash2.org:8119/stats"]
       ]
   };

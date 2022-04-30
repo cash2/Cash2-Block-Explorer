@@ -1,1109 +1,1109 @@
 <!DOCTYPE html>
 <html>
-<head lang="en">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1">
-<link rel="icon" type="image/png" sizes="100x100" href="favicon.png">
-<title>Cash2 Block Explorer</title>
-<script src="https://unpkg.com/popper.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timeago/1.4.0/jquery.timeago.min.js"></script>
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-sparklines/2.1.2/jquery.sparkline.min.js"></script> -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<!-- <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"> -->
-<!-- <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet"> -->
-<!-- <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,500" rel="stylesheet"> -->
-<!-- <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700" rel="stylesheet"> -->
-<!-- <link href="css/themes/white/style.css" rel="stylesheet" id="theme_link"> -->
-<style>
-  a:visited
-  {
-    color: blue !important;
-  }
+  <head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1">
+    <link rel="icon" type="image/png" sizes="100x100" href="icon.ico">
+    <title>Cash2 Block Explorer</title>
+    <script src="https://unpkg.com/popper.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timeago/1.4.0/jquery.timeago.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+      a:visited
+      {
+        color: blue !important;
+      }
 
-  a:active
-  {
-    color: blue !important;
-  }
+      a:active
+      {
+        color: blue !important;
+      }
 
-  a
-  {
-    color: blue !important;
-  }
+      a
+      {
+        color: blue !important;
+      }
 
-  body
-  {
-    background: #f8f8f8;
-    font-family: sans-serif;
-    text-align: center;
-    padding-top: 35px;
-    font-size: 18px;
-  }
+      body
+      {
+        background: #f8f8f8;
+        font-family: sans-serif;
+        text-align: center;
+        padding-top: 35px;
+        font-size: 18px;
+      }
 
-  h3
-  {
-    padding-top: 10px;
-    padding-bottom: 10px;
-    border-radius: 25px;
-  }
+      h3
+      {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        border-radius: 25px;
+      }
 
-  #btn_search
-  {
-    background: #cccccc;
-    border: 1px solid #c5c5c5;
-    width: 100px;
-  }
+      #btn_search
+      {
+        background: #cccccc;
+        border: 1px solid #c5c5c5;
+        width: 100px;
+      }
 
-  #btn_search:hover
-  {
-    background: #b5b5b5;
-    border: 1 px solid #b0b0b0;
-  }
+      #btn_search:hover
+      {
+        background: #b5b5b5;
+        border: 1 px solid #b0b0b0;
+      }
 
-  #cash2A
-  {
-    text-decoration: none
-  }
+      #cash2A
+      {
+        text-decoration: none
+      }
 
-  #cash2Span
-  {
-    text-decoration: none;
-    color: black;
-  }
+      #cash2Span
+      {
+        text-decoration: none;
+        color: black;
+      }
 
-  #check_transaction
-  {
-    background: #cccccc;
-    border: 1px solid #c5c5c5;
-    color: #000000;
-    padding-left: 15px;
-    padding-right: 15px;
-  }
+      #cash2Text
+      {
+        height: 50px;
+      }
 
-  #check_transaction:hover
-  {
-    background: #b5b5b5;
-    border: 1 px solid #b0b0b0;
-  }
+      #cash2TextDiv
+      {
+        display: flex;
+        justify-content: center;
+        padding-top: 20px;
+        padding-bottom: 20px;
+      }
 
-  #copyrightDiv
-  {
-    padding: 10px;
-    background: #eaeaea;
-    font-size: 12px;
-  }
+      #check_transaction
+      {
+        background: #cccccc;
+        border: 1px solid #c5c5c5;
+        color: #000000;
+        padding-left: 15px;
+        padding-right: 15px;
+      }
 
-  #loadMoreBlocks
-  {
-    display: inline-block;
-    color: blue;
-    padding-bottom: 20px;
-    padding-left: 20px;
-    padding-right: 20px;
-  }
+      #check_transaction:hover
+      {
+        background: #b5b5b5;
+        border: 1 px solid #b0b0b0;
+      }
 
-  #loadMoreBlocks:hover
-  {
-    cursor: pointer;
-    text-decoration: underline;
-  }
-  
-  #logo
-  {
-    height: 35px;
-    line-height: 35px;
-    display: inline-block;
-  }
+      #copyrightDiv
+      {
+        padding: 10px;
+        background: #eaeaea;
+        font-size: 12px;
+      }
 
-  #mempoolDiv
-  {
-    padding-top: 50px;
-    padding-bottom: 50px;
-  }
+      #loadMoreBlocks
+      {
+        display: inline-block;
+        color: blue;
+        padding-bottom: 20px;
+        padding-left: 20px;
+        padding-right: 20px;
+      }
 
-  #searchDiv
-  {
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-top: 50px;
-    padding-bottom: 50px;
-  }
+      #loadMoreBlocks:hover
+      {
+        cursor: pointer;
+        text-decoration: underline;
+      }
 
-  #separatorDiv
-  {
-    height: 500px;
-  }
+      #logo
+      {
+        height: 3rem;
+      }
 
-  .bold
-  {
-    font-weight: bold;
-  }
+      #mempoolDiv
+      {
+        padding-top: 50px;
+        padding-bottom: 50px;
+      }
 
-  .col-centered
-  {
-    float: none;
-    margin: 0 auto;
-  }
+      #searchDiv
+      {
+        padding-left: 15px;
+        padding-right: 15px;
+        padding-top: 50px;
+        padding-bottom: 50px;
+      }
 
-  .dark
-  {
-    background: #eaeaea;
-  }
-       
-  .green
-  {
-    color:#00ff00;
-  }
+      #separatorDiv
+      {
+        height: 500px;
+      }
 
-  .hidden
-  {
-    display: none;
-  }
-  
-  .hidden-xs-down
-  {
-    padding-left: 10px;
-    padding-right: 10px;
-  }
-  
-  .large
-  {
-    font-size: 50px;
-  }
-  
-  .monospace
-  {
-    font-family: monospace;
-  }
+      .bold
+      {
+        font-weight: bold;
+      }
 
-  .red
-  {
-    color:#ff0000;
-  }
-  
-  .serif
-  {
-    font-family: serif;
-  }
+      .col-centered
+      {
+        float: none;
+        margin: 0 auto;
+      }
 
-  .small
-  {
-    padding: 5px;
-    font-size: 20px;
-  }
+      .dark
+      {
+        background: #eaeaea;
+      }
 
-  .table-fixed
-  {
-    table-layout: fixed;
-  }
+      .green
+      {
+        color:#00ff00;
+      }
 
-  .table td
-  {
-    border: none;
-  }
+      .hidden
+      {
+        display: none;
+      }
 
-  .text-centered
-  {
-    text-align: center;
-  }
-  
-  .underline
-  {
-    text-decoration: underline;
-  }
-</style>
-</head>
+      .hidden-xs-down
+      {
+        padding-left: 10px;
+        padding-right: 10px;
+      }
 
-<body>
-<br/>
-<img id="logo" src="cash2Logo100x100.svg">
-<h1 class="large serif bold"><a id="cash2A" href="https://cash2.org"><span id="cash2Span">Cash2</span></a></h1>
-<h5 id="blockExplorerH5">Block Explorer</h5>
-<div class="hidden navbar-header">
-  <div id="stats_updated">
-    <i class="fa fa-bolt"></i>
-  </div>
-</div>
-<div id="searchDiv">
-  <div class="col-sm-5 col-md-5 col-centered">
-    <input class="form-control text-centered" placeholder="block height, block hash, transaction hash, or payment id" id="txt_search">
-    <br/>
-    <span>
-      <button class="btn btn-default" type="button" id="btn_search">
-        <span>Search</span>
-      </button>
-    </span>
-  </div>
-</div>
+      .large
+      {
+        font-size: 50px;
+      }
 
-<br/>
+      .monospace
+      {
+        font-family: monospace;
+      }
 
-<div class="hidden collapse navbar-collapse">
-  <ul class="nav navbar-nav navbar-left explorer_menu">
-    <li>
-      <a class="hot_link" data-page="home.html" href="#">
-        <i class="fa fa-cubes" aria-hidden="true"></i> Block Explorer
-      </a>
-    </li>    
-    <li>
-      <a class="hot_link" data-page="blockchain_block.html" href="#blockchain_block">
-        <i class="fa fa-cubes"></i> Block
-      </a>
-    </li>
-    <li>
-      <a class="hot_link" data-page="blockchain_transaction.html" href="#blockchain_transaction">
-        <i class="fa fa-cubes"></i> Transaction
-      </a>
-    </li>
-    <li>
-      <a class="hot_link" data-page="blockchain_payment_id.html" href="#blockchain_payment_id">
-        <i class="fa fa-cubes"></i> Transactions by Payment ID
-      </a>
-    </li>
-    <li>
-      <a class="hot_link" data-page="support.html" href="#support">
-        <i class="fa fa-comments"></i> Help
-      </a>
-    </li> 
-  </ul>
-  <div class="nav col-md-6 navbar-right explorer-search">
-    <div class="input-group">
-      <input class="form-control" placeholder="Search by block height / hash, transaction hash, payment id" id="txt_search_old">
-      <span class="input-group-btn"><button class="btn btn-default" type="button" id="btn_search_old">
-        <span><i class="fa fa-search"></i> Search</span>
-      </button></span>
+      .red
+      {
+        color:#ff0000;
+      }
+
+      .serif
+      {
+        font-family: serif;
+      }
+
+      .small
+      {
+        padding: 5px;
+        font-size: 20px;
+      }
+
+      .table-fixed
+      {
+        table-layout: fixed;
+      }
+
+      .table td
+      {
+        border: none;
+      }
+
+      .text-centered
+      {
+        text-align: center;
+      }
+
+      .underline
+      {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <img id="logo" src="cash2Logo100x100.svg" />
     </div>
-  </div>
-</div>
+    <div id="cash2TextDiv">
+      <a id="cash2A" href="https://cash2.org"><img id="cash2Text" src="cash2Text.svg" /></a>
+    </div>
+    <h5 id="blockExplorerH5">Block Explorer</h5>
+    <div class="hidden navbar-header">
+      <div id="stats_updated">
+        <i class="fa fa-bolt"></i>
+      </div>
+    </div>
+    <div id="searchDiv">
+      <div class="col-sm-5 col-md-5 col-centered">
+        <input class="form-control text-centered" placeholder="block height, block hash, transaction hash, or payment id" id="txt_search">
+        <br/>
+        <span>
+          <button class="btn btn-default" type="button" id="btn_search">
+            <span>Search</span>
+          </button>
+        </span>
+      </div>
+    </div>
+    <br/>
+    <div class="hidden collapse navbar-collapse">
+      <ul class="nav navbar-nav navbar-left explorer_menu">
+        <li>
+          <a class="hot_link" data-page="home.html" href="#">
+            <i class="fa fa-cubes" aria-hidden="true"></i> Block Explorer
+          </a>
+        </li>    
+        <li>
+          <a class="hot_link" data-page="blockchain_block.html" href="#blockchain_block">
+            <i class="fa fa-cubes"></i> Block
+          </a>
+        </li>
+        <li>
+          <a class="hot_link" data-page="blockchain_transaction.html" href="#blockchain_transaction">
+            <i class="fa fa-cubes"></i> Transaction
+          </a>
+        </li>
+        <li>
+          <a class="hot_link" data-page="blockchain_payment_id.html" href="#blockchain_payment_id">
+            <i class="fa fa-cubes"></i> Transactions by Payment ID
+          </a>
+        </li>
+        <li>
+          <a class="hot_link" data-page="support.html" href="#support">
+            <i class="fa fa-comments"></i> Help
+          </a>
+        </li> 
+      </ul>
+      <div class="nav col-md-6 navbar-right explorer-search">
+        <div class="input-group">
+          <input class="form-control" placeholder="Search by block height / hash, transaction hash, payment id" id="txt_search_old">
+          <span class="input-group-btn"><button class="btn btn-default" type="button" id="btn_search_old">
+            <span><i class="fa fa-search"></i> Search</span>
+          </button></span>
+        </div>
+      </div>
+    </div>
+    <div id="content">
+      <div id="page"></div>
+      <p id="loading" class="text-center"><i class="fa fa-circle-o-notch fa-spin"></i></p>
+    </div>
+    <br/>
+    <br/>
+    <br/>
+    <div id="separatorDiv"></div>
+    <footer>
+      <div class="hidden">
+        <strong class="text-info">Node info</strong>
+        <p>Status: <span id="node_connection" class="text-danger">Offline</span></p>
+        <p>Version: <span id="node_ver">...</span></p>
+        <p>Height: <span id="node_height">...</span></p>
+        <p>Last block: <span id="node_block">...</span></p>
+        <p>Difficulty: <span id="node_diff">...</span></p>
+        <p>Alt. blocks: <span id="node_alt">...</span></p>
+        <p>RPC connections: <span id="node_rpc">...</span></p>
+        <p>Incoming P2P connections: <span id="node_inc">...</span></p>
+        <p>Outgoing P2P connects: <span id="node_out">...</span></p>
+        <p>White peers: <span id="node_white">...</span></p>
+        <p>Grey peers: <span id="node_grey">...</span></p>
+      </div>
+      <div id="copyrightDiv">
+        <!-- This copyright should be left intact -->
+        Powered by <a target="_blank" href="https://github.com/Karbovanets/Karbowanec-Blockchain-Explorer"><i class="fa fa-github"></i> Karbowanec Blockchain Explorer</a>
+        v. 1.1.2.<br />
+        <span class="text-muted">
+          Partially based on <strong>cryptonote-universal-pool</strong><br/>
+          open sourced under the <a href="http://www.gnu.org/licenses/gpl-2.0.html">GPL</a><br/><br/>
+          Modified by Cash2 developers
+        </span>
+      </div>
+    </footer>
+    <a href="#" class="hidden scrollup"><i class="fa fa-chevron-circle-up"></i></a>
 
-<div id="content">
-  <div id="page"></div>
-  <p id="loading" class="text-center"><i class="fa fa-circle-o-notch fa-spin"></i></p>
-</div>
+    <!-- Javascript -->
 
-<br/>
-<br/>
-<br/>
+    <script src="config.js"></script>
 
-<div id="separatorDiv"></div>
+    <script>
+      var blockchainExplorer   = "/?hash={id}#blockchain_block";
+      var transactionExplorer = "/?hash={id}#blockchain_transaction";
+      var paymentIdExplorer   = "/?hash={id}#blockchain_payment_id";
 
-<footer>
-  <div class="hidden">
-    <strong class="text-info">Node info</strong>
-    <p>Status: <span id="node_connection" class="text-danger">Offline</span></p>
-    <p>Version: <span id="node_ver">...</span></p>
-    <p>Height: <span id="node_height">...</span></p>
-    <p>Last block: <span id="node_block">...</span></p>
-    <p>Difficulty: <span id="node_diff">...</span></p>
-    <p>Alt. blocks: <span id="node_alt">...</span></p>
-    <p>RPC connections: <span id="node_rpc">...</span></p>
-    <p>Incoming P2P connections: <span id="node_inc">...</span></p>
-    <p>Outgoing P2P connects: <span id="node_out">...</span></p>
-    <p>White peers: <span id="node_white">...</span></p>
-    <p>Grey peers: <span id="node_grey">...</span></p>
-  </div>
+      var style_cookie_name = "style";
+      var style_cookie_duration = 365;
+      var style_domain = window.location.hostname;
 
-  <div id="copyrightDiv">
-    <!-- This copyright should be left intact -->
-    Powered by <a target="_blank" href="https://github.com/Karbovanets/Karbowanec-Blockchain-Explorer"><i class="fa fa-github"></i> Karbowanec Blockchain Explorer</a>
-    v. 1.1.2.<br />
-    <span class="text-muted">
-      Partially based on <strong>cryptonote-universal-pool</strong><br/>
-      open sourced under the <a href="http://www.gnu.org/licenses/gpl-2.0.html">GPL</a><br/><br/>
-      Modified by Cash2 developers
-    </span>
-  </div>
-</footer>
-<a href="#" class="hidden scrollup"><i class="fa fa-chevron-circle-up"></i></a>
-
-<!-- Javascript -->
-
-<script src="config.js"></script>
-
-<script>
-  var blockchainExplorer   = "/?hash={id}#blockchain_block";
-  var transactionExplorer = "/?hash={id}#blockchain_transaction";
-  var paymentIdExplorer   = "/?hash={id}#blockchain_payment_id";
-  
-  var style_cookie_name = "style";
-  var style_cookie_duration = 365;
-  var style_domain = window.location.hostname;
-  
-  function getTransactionUrl(id)
-  {
-    return transactionExplorer.replace('{symbol}', symbol.toLowerCase()).replace('{id}', id);
-  }
-  
-  $.fn.update = function(txt) {
-    var el = this[0];
-    if (el.textContent !== txt)
-    {
-      el.textContent = txt;
-    }
-
-    return this;
-  };
-
-  function updateTextClasses(className, text)
-  {
-    var els = document.getElementsByClassName(className);
-    for (var i = 0; i < els.length; i++)
-    {
-      var el = els[i];
-      if (el.textContent !== text)
+      function getTransactionUrl(id)
       {
-        el.textContent = text;
+        return transactionExplorer.replace('{symbol}', symbol.toLowerCase()).replace('{id}', id);
       }
-    }
-  }
 
-  function updateText(elementId, text)
-  {
-    var el = document.getElementById(elementId);
-    if (el.textContent !== text)
-    {
-      el.textContent = text;
-    }
+      $.fn.update = function(txt) {
+        var el = this[0];
+        if (el.textContent !== txt)
+        {
+          el.textContent = txt;
+        }
 
-    return el;
-  }
+        return this;
+      };
 
-  function updateTextLinkable(elementId, text)
-  {
-    var el = document.getElementById(elementId);
-    if (el.innerHTML !== text)
-    {
-      el.innerHTML = text;
-    }
-
-    return el;
-  }
-
-  var currentPage;
-  var lastStats;
-  var nodeStatus;
-
-  function getReadableHashRateString(hashrate)
-  {
-    var i = 0;
-    var byteUnits = [' H/s', ' kH/s', ' MH/s', ' GH/s', ' TH/s', ' PH/s', ' EH/s', ' ZH/s', ' YH/s' ];
-    while (hashrate > 1000)
-    {
-      hashrate = hashrate / 1000;
-      i++;
-    }
-
-    return hashrate.toFixed(2) + byteUnits[i];
-  }
-
-  function getReadableBlockHeight(blockHeight)
-  {
-    return blockHeight.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  }
-  
-  function getReadableDifficultyString(difficulty, precision)
-  {
-    // if (isNaN(parseFloat(difficulty)) || !isFinite(difficulty)) return 0;
-    // if (typeof precision === 'undefined') precision = 2;
-    // var units = ['', 'k', 'M', 'G', 'T', 'P'],
-    //         number = Math.floor(Math.log(difficulty) / Math.log(1000));
-    // if (units[number] === undefined || units[number] === null) {
-    //         return 0
-    // }
-
-    // return (difficulty / Math.pow(1000, Math.floor(number))).toFixed(precision) + ' ' +  units[number];
-
-    return difficulty.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  }
-  
-  function formatBlockLink(hash, height)
-  {
-    return '<a href="' + getBlockchainUrl(hash) + '">' + getReadableBlockHeight(height) + '</a>'; // shows commas for block heights
-  }
-
-  function getReadableCoins(coins, digits, withoutSymbol)
-  {
-    var amount = (parseInt(coins || 0) / coinUnits).toFixed(digits || coinUnits.toString().length - 1);
-    var parts = amount.toString().split(".");
-    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    
-    // if no decimals are wanted, we discard all numbers after the decimal
-    if (digits == 0)
-    {
-      amount = parts[0];
-    }
-    else
-    {
-      amount = parts.join(".");
-    }
-
-    return amount + (withoutSymbol ? '' : (' ' + symbol));
-  }
-
-  function formatDate(time)
-  {
-    if (!time)
-    {
-      return '';
-    }
-
-    var options = { weekday: 'short', month: '2-digit', day: '2-digit', year: '2-digit', hour: 'numeric', minute: 'numeric', second: 'numeric' };
-    
-    return new Date(parseInt(time) * 1000).toLocaleString('en-US', options);
-  }
-  
-  function formatBytes(a, b)
-  {
-    if (0 == a)
-    {
-      return "0 Bytes";
-    }
-
-    var c = 1024;
-    var d = b || 2;
-    var e = ["Bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
-    var f = Math.floor(Math.log(a) / Math.log(c));
-
-    return parseFloat((a / Math.pow(c, f)).toFixed(d)) + " " + e[f]
-  }
-  
-  function formatPaymentLink(hash)
-  {
-    return '<a href="' + getTransactionUrl(hash) + '">' + hash + '</a>';
-  }
-  
-  function pulseLiveUpdate()
-  {
-    var stats_update = document.getElementById('stats_updated');
-    stats_update.style.transition = 'opacity 100ms ease-out';
-    stats_update.style.opacity = 1;
-    setTimeout(function() {
-      stats_update.style.transition = 'opacity 7000ms linear';
-      stats_update.style.opacity = 0;
-    }, 500);
-  }
-
-  window.onhashchange = function()
-  {
-    routePage();
-  };
-
-  function fetchLiveStats()
-  {
-    $.ajax({
-      url: api + '/get_info',
-      dataType: 'json',
-      type: 'GET',
-      cache: 'false'
-    }).done(function(data, success) {
-      pulseLiveUpdate();
-      lastStats = data;
-      nodeStatus = success;
-      currentPage.update();
-      nodeInfo();
-    }).always(function () {
-      // setTimeout(function() { fetchLiveStats(); }, refreshDelay);
-    });
-  }
-
-  function floatToString(float)
-  {
-    return float.toFixed(6).replace(/[0\.]+$/, '');
-  }
-
-  function nodeInfo()
-  {
-    if (nodeStatus)
-    {
-      $('#node_connection').html('Online').addClass('text-success').removeClass('text-danger');
-      $('#node_height').html(parseInt(lastStats['height']));
-      $('#node_block').html(parseInt(lastStats['last_known_block_height']));
-      $('#node_diff').html(parseInt(lastStats['difficulty']));
-      $('#node_alt').html(parseInt(lastStats['orphan_blocks_count']));
-      $('#node_rpc').html(parseInt(lastStats['connections_count']));
-      $('#node_inc').html(parseInt(lastStats['incoming_connections_count']));
-      $('#node_out').html(parseInt(lastStats['outgoing_connections_count']));
-      $('#node_white').html(parseInt(lastStats['white_peerlist_size']));
-      $('#node_grey').html(parseInt(lastStats['grey_peerlist_size']));
-      
-      if (lastStats['version'] !== 'undefined')
+      function updateTextClasses(className, text)
       {
-        $('#node_ver').html(lastStats['version']);
-      }
-    }
-    else
-    {
-      $('#node_connection').html('Offline').addClass('text-danger').removeClass('text-success');
-    }
-  }
-  
-  var xhrPageLoading;
-  function routePage(loadedCallback)
-  {
-    if (currentPage)
-    {
-      currentPage.destroy();
-    }
-
-    $('#page').html('');
-    $('#loading').show();
-
-    if (xhrPageLoading)
-    {
-      xhrPageLoading.abort();
-    }
-
-    $('.hot_link').parent().removeClass('active');
-    var $link = $('a.hot_link[href="' + (window.location.hash || '#') + '"]');
-
-    $link.parent().addClass('active');
-    var page = $link.data('page');
-
-    xhrPageLoading = $.ajax({
-      url: 'pages/' + page,
-      cache: false,
-      success: function(data) {
-        $('#loading').hide();
-        $('#page').show().html(data);
-        currentPage.init();
-        currentPage.update();
-        if (loadedCallback)
+        var els = document.getElementsByClassName(className);
+        for (var i = 0; i < els.length; i++)
         {
-          loadedCallback();
+          var el = els[i];
+          if (el.textContent !== text)
+          {
+            el.textContent = text;
+          }
         }
       }
-    });
-  }
 
-  function getBlockchainUrl(id)
-  {
-    return blockchainExplorer.replace('{id}', id);
-  }
-
-  $(function() {
-    $.get(api + '/get_info', function(data) {
-      try
+      function updateText(elementId, text)
       {
-        lastStats = JSON.parse(data);
+        var el = document.getElementById(elementId);
+        if (el.textContent !== text)
+        {
+          el.textContent = text;
+        }
+
+        return el;
       }
-      catch(e)
+
+      function updateTextLinkable(elementId, text)
       {
-        lastStats = data;
+        var el = document.getElementById(elementId);
+        if (el.innerHTML !== text)
+        {
+          el.innerHTML = text;
+        }
+
+        return el;
       }
 
-      routePage(fetchLiveStats);
-    });
-  });
+      var currentPage;
+      var lastStats;
+      var nodeStatus;
 
-  // Blockexplorer functions
-  urlParam = function(name) {
-    var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
-    if (results==null)
-    {
-      return null;
-    }
-    else
-    {
-      return results[1] || 0;
-    }
-  }
-  
-  function hex2a(hexx)
-  {
-    var hex = hexx.toString();//force conversion
-    var str = '';
-    for (var i = 0; i < hex.length; i += 2)
-    {
-      str += String.fromCharCode(parseInt(hex.substr(i, 2), 16));
-    }
-
-    return str;
-  }
-
-$('#btn_search').click(function(e) {
-  var text = document.getElementById('txt_search').value;
-
-  function GetSearchBlockbyHeight()
-  {
-    var block, xhrGetSearchBlockbyHeight;
-    if (xhrGetSearchBlockbyHeight)
-    {
-      xhrGetSearchBlockbyHeight.abort();
-    }
-
-    xhrGetSearchBlockbyHeight = $.ajax({
-      url: api + '/json_rpc',
-      method: "POST",
-      data: JSON.stringify({
-        jsonrpc:"2.0",
-        id: "blockbyheight",
-        method:"get_block_header_by_height",
-        params: {
-           height: parseInt(text)
-        }
-      }),
-      dataType: 'json',
-      cache: 'false',
-      success: function(data) {
-        if (data.result)
+      function getReadableHashRateString(hashrate)
+      {
+        var i = 0;
+        var byteUnits = [' H/s', ' kH/s', ' MH/s', ' GH/s', ' TH/s', ' PH/s', ' EH/s', ' ZH/s', ' YH/s' ];
+        while (hashrate > 1000)
         {
-          block = data.result.block_header;
-          window.location.href = getBlockchainUrl(block.hash);
+          hashrate = hashrate / 1000;
+          i++;
         }
-        else if (data.error)
-        {
-          wrongSearchAlert();
-        }
+
+        return hashrate.toFixed(2) + byteUnits[i];
       }
-    });
-  }
 
-  function GetSearchBlock()
-  {
-    var block, xhrGetSearchBlock;
-    if (xhrGetSearchBlock)
-    {
-      xhrGetSearchBlock.abort();
-    }
+      function getReadableBlockHeight(blockHeight)
+      {
+        return blockHeight.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      }
 
-    xhrGetSearchBlock = $.ajax({
-      url: api + '/json_rpc',
-      method: "POST",
-      data: JSON.stringify({
-        jsonrpc:"2.0",
-        id: "GetSearchBlock",
-        method:"get_block",
-        params: {
-           hash: text
-        }
-      }),
-      dataType: 'json',
-      cache: 'false',
-      success: function(data) {
-        if (data.result)
+      function getReadableDifficultyString(difficulty, precision)
+      {
+        // if (isNaN(parseFloat(difficulty)) || !isFinite(difficulty)) return 0;
+        // if (typeof precision === 'undefined') precision = 2;
+        // var units = ['', 'k', 'M', 'G', 'T', 'P'],
+        //         number = Math.floor(Math.log(difficulty) / Math.log(1000));
+        // if (units[number] === undefined || units[number] === null) {
+        //         return 0
+        // }
+
+        // return (difficulty / Math.pow(1000, Math.floor(number))).toFixed(precision) + ' ' +  units[number];
+
+        return difficulty.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      }
+
+      function formatBlockLink(hash, height)
+      {
+        return '<a href="' + getBlockchainUrl(hash) + '">' + getReadableBlockHeight(height) + '</a>'; // shows commas for block heights
+      }
+
+      function getReadableCoins(coins, digits, withoutSymbol)
+      {
+        var amount = (parseInt(coins || 0) / coinUnits).toFixed(digits || coinUnits.toString().length - 1);
+        var parts = amount.toString().split(".");
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+        // if no decimals are wanted, we discard all numbers after the decimal
+        if (digits == 0)
         {
-          block = data.result.block;
-          sessionStorage.setItem('searchBlock', JSON.stringify(block));
-          window.location.href = getBlockchainUrl(block.hash);
-        }
-        else if (data.error)
-        {
-          $.ajax({
-            url: api + '/json_rpc',
-            method: "POST",
-            data: JSON.stringify({
-              jsonrpc:"2.0",
-              id: "test",
-              method:"get_transaction",
-              params: {
-                hash: text
-              }
-            }),
-            dataType: 'json',
-            cache: 'false',
-            success: function(data) {
-              if (data.result)
-              {
-                sessionStorage.setItem('searchTransaction', JSON.stringify(data.result));
-                window.location.href = transactionExplorer.replace('{id}', text);
-              }
-              else if (data.error)
-              {
-                xhrGetTsx =  $.ajax({
-                  url: api + '/json_rpc',
-                  method: "POST",
-                  data: JSON.stringify({
-                    jsonrpc:"2.0",
-                    id: "test",
-                    method:"get_transactions_by_payment_id",
-                    params: {
-                      payment_id: text
-                    }
-                  }),
-                  dataType: 'json',
-                  cache: 'false',
-                  success: function(data) {
-                    if (data.result)
-                    {
-                      txsByPaymentId = data.result.transactions;
-                      sessionStorage.setItem('txsByPaymentId', JSON.stringify(txsByPaymentId));
-                      window.location.href = paymentIdExplorer.replace('{id}', text);
-                    }
-                    else if (data.error)
-                    {
-                      $('#page').after(
-                        '<div class="alert alert-warning alert-dismissable fade in" style="position: fixed; right: 50px; top: 50px;">'+
-                          '<button type="button" class="close" ' + 
-                              'data-dismiss="alert" aria-hidden="true">' + 
-                            '&times;' + 
-                          '</button>' + 
-                          'We could not find anything.' + 
-                         '</div>');
-                    }
-                  }
-                });
-              }
-            }
-          });
-        }
-      }  
-    });
-  }
-
-  if ( text.length < 64 )
-  {
-    GetSearchBlockbyHeight();
-  }
-  else if ( text.length == 64 )
-  {
-    GetSearchBlock();
-  }
-  else
-  {
-    wrongSearchAlert();
-  }
-
-  e.preventDefault();
-
-});
-
-function wrongSearchAlert()
-{
-  $('#page').after(
-    '<div class="alert alert-danger alert-dismissable fade in" style="position: fixed; right: 50px; top: 50px;">'+
-    '<button type="button" class="close" ' + 
-    'data-dismiss="alert" aria-hidden="true">' + 
-    '&times;' + 
-    '</button>' + 
-    '<strong>Wrong search query!</strong><br /> Please enter block height or hash, transaction hash, or payment id.' + 
-    '</div>');
-}
-
-$('#txt_search').keyup(function(e) {
-  if (e.keyCode === 13)
-  {
-    $('#btn_search').click();
-  }
-});
-
-</script>
-
-<script>
-  jQuery(function($) {
-    $(document).ready(function() {
-      $(window).scroll(function() {
-        if ($(this).scrollTop() > 500)
-        {
-          $('.scrollup').fadeIn();
+          amount = parts[0];
         }
         else
         {
-          $('.scrollup').fadeOut();
+          amount = parts.join(".");
         }
-      }); 
 
-      $('.scrollup').click(function() {
-        $("html, body").animate({ scrollTop: 0 }, 600);
-        return false;
+        return amount + (withoutSymbol ? '' : (' ' + symbol));
+      }
+
+      function formatDate(time)
+      {
+        if (!time)
+        {
+          return '';
+        }
+
+        var options = { weekday: 'short', month: '2-digit', day: '2-digit', year: '2-digit', hour: 'numeric', minute: 'numeric', second: 'numeric' };
+
+        return new Date(parseInt(time) * 1000).toLocaleString('en-US', options);
+      }
+
+      function formatBytes(a, b)
+      {
+        if (0 == a)
+        {
+          return "0 Bytes";
+        }
+
+        var c = 1024;
+        var d = b || 2;
+        var e = ["Bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
+        var f = Math.floor(Math.log(a) / Math.log(c));
+
+        return parseFloat((a / Math.pow(c, f)).toFixed(d)) + " " + e[f]
+      }
+
+      function formatPaymentLink(hash)
+      {
+        return '<a href="' + getTransactionUrl(hash) + '">' + hash + '</a>';
+      }
+
+      function pulseLiveUpdate()
+      {
+        var stats_update = document.getElementById('stats_updated');
+        stats_update.style.transition = 'opacity 100ms ease-out';
+        stats_update.style.opacity = 1;
+        setTimeout(function() {
+          stats_update.style.transition = 'opacity 7000ms linear';
+          stats_update.style.opacity = 0;
+        }, 500);
+      }
+
+      window.onhashchange = function()
+      {
+        routePage();
+      };
+
+      function fetchLiveStats()
+      {
+        $.ajax({
+          url: api + '/get_info',
+          dataType: 'json',
+          type: 'GET',
+          cache: 'false'
+        }).done(function(data, success) {
+          pulseLiveUpdate();
+          lastStats = data;
+          nodeStatus = success;
+          currentPage.update();
+          nodeInfo();
+        }).always(function () {
+          // setTimeout(function() { fetchLiveStats(); }, refreshDelay);
+        });
+      }
+
+      function floatToString(float)
+      {
+        return float.toFixed(6).replace(/[0\.]+$/, '');
+      }
+
+      function nodeInfo()
+      {
+        if (nodeStatus)
+        {
+          $('#node_connection').html('Online').addClass('text-success').removeClass('text-danger');
+          $('#node_height').html(parseInt(lastStats['height']));
+          $('#node_block').html(parseInt(lastStats['last_known_block_height']));
+          $('#node_diff').html(parseInt(lastStats['difficulty']));
+          $('#node_alt').html(parseInt(lastStats['orphan_blocks_count']));
+          $('#node_rpc').html(parseInt(lastStats['connections_count']));
+          $('#node_inc').html(parseInt(lastStats['incoming_connections_count']));
+          $('#node_out').html(parseInt(lastStats['outgoing_connections_count']));
+          $('#node_white').html(parseInt(lastStats['white_peerlist_size']));
+          $('#node_grey').html(parseInt(lastStats['grey_peerlist_size']));
+
+          if (lastStats['version'] !== 'undefined')
+          {
+            $('#node_ver').html(lastStats['version']);
+          }
+        }
+        else
+        {
+          $('#node_connection').html('Offline').addClass('text-danger').removeClass('text-success');
+        }
+      }
+
+      var xhrPageLoading;
+      function routePage(loadedCallback)
+      {
+        if (currentPage)
+        {
+          currentPage.destroy();
+        }
+
+        $('#page').html('');
+        $('#loading').show();
+
+        if (xhrPageLoading)
+        {
+          xhrPageLoading.abort();
+        }
+
+        $('.hot_link').parent().removeClass('active');
+        var $link = $('a.hot_link[href="' + (window.location.hash || '#') + '"]');
+
+        $link.parent().addClass('active');
+        var page = $link.data('page');
+
+        xhrPageLoading = $.ajax({
+          url: 'pages/' + page,
+          cache: false,
+          success: function(data) {
+            $('#loading').hide();
+            $('#page').show().html(data);
+            currentPage.init();
+            currentPage.update();
+            if (loadedCallback)
+            {
+              loadedCallback();
+            }
+          }
+        });
+      }
+
+      function getBlockchainUrl(id)
+      {
+        return blockchainExplorer.replace('{id}', id);
+      }
+
+      $(function() {
+        $.get(api + '/get_info', function(data) {
+          try
+          {
+            lastStats = JSON.parse(data);
+          }
+          catch(e)
+          {
+            lastStats = data;
+          }
+
+          routePage(fetchLiveStats);
+        });
       });
 
-      $('.scrollup').css('opacity','0.3');
-   
-      $('.scrollup').hover(function() {
-        $(this).stop().animate({opacity: 0.9}, 400);
-       }, function() {
-        $(this).stop().animate({opacity: 0.3}, 400);
-      });  
-      
-    });
-  });
-</script>
+      // Blockexplorer functions
+      urlParam = function(name) {
+        var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+        if (results==null)
+        {
+          return null;
+        }
+        else
+        {
+          return results[1] || 0;
+        }
+      }
 
-<script>
-  // Check transaction key
-
-  var xhrGetTransaction, xhrCheckTransactionByKey, xhrCheckTransactionByViewKey, transaction;
-	var transactionHash = $("#transaction_hash");
-	var privateKey = $("#private_key");
-	var publicAddress = $("#public_address");
-
-  currentPage = {
-    destroy: function(){
-      if (xhrGetTransaction) xhrGetTransaction.abort();
-      if (xhrCheckTransactionByKey) xhrCheckTransactionByKey.abort();
-      if (xhrCheckTransactionByViewKey) xhrCheckTransactionByViewKey.abort();
-    },
-    init: function(){
-    },
-    update: function(){
-    }
-  };
-
-	$("#check_result").hide();
-	
-	$("#check_transaction").click(function() {
-
-    // alert("check_transaction");
-
-		$("#check_result").hide();
-		$('#inputs_rows').empty();
-		$('#outputs_rows').empty();
-		$('#receivedAmount').empty();
-		$('#transactionHash').empty();
-
-		if(!transactionHash.val() || !privateKey.val() || !publicAddress.val())
-    {
-			wrongParamAlert("Fill all fields!");
-			return;
-		}
-
-		getTransaction();
-
-	});
-
-	function getTransaction()
-  {
-
-    // alert("getTransaction()");
-
-    if (xhrGetTransaction)
-    {
-      xhrGetTransaction.abort();
-    }
-
-		xhrGetTransaction = $.ajax({
-			url: api + '/json_rpc',
-			method: "POST",
-			data: JSON.stringify({
-				jsonrpc:"2.0",
-				id: "test",
-				method:"get_transaction",
-				params: {
-					hash: transactionHash.val()
-				}
-			}),
-			dataType: 'json',
-			cache: 'false',
-			success: function(data)
+      function hex2a(hexx)
       {
-        // console.log(data);
-
-			  if (data.error)
+        var hex = hexx.toString();//force conversion
+        var str = '';
+        for (var i = 0; i < hex.length; i += 2)
         {
-          wrongParamAlert(data.error.message);
-			  }
-        else 
+          str += String.fromCharCode(parseInt(hex.substr(i, 2), 16));
+        }
+
+        return str;
+      }
+
+    $('#btn_search').click(function(e) {
+      var text = document.getElementById('txt_search').value;
+
+      function GetSearchBlockbyHeight()
+      {
+        var block, xhrGetSearchBlockbyHeight;
+        if (xhrGetSearchBlockbyHeight)
         {
-          // alert("no error");
+          xhrGetSearchBlockbyHeight.abort();
+        }
 
-          var tx = data.result;
-          renderTransaction(tx);
-          checkTxKey();
-			  }
-			}
-		});
-	}	
-	
-	function checkTxKey(){
+        xhrGetSearchBlockbyHeight = $.ajax({
+          url: api + '/json_rpc',
+          method: "POST",
+          data: JSON.stringify({
+            jsonrpc:"2.0",
+            id: "blockbyheight",
+            method:"get_block_header_by_height",
+            params: {
+               height: parseInt(text)
+            }
+          }),
+          dataType: 'json',
+          cache: 'false',
+          success: function(data) {
+            if (data.result)
+            {
+              block = data.result.block_header;
+              window.location.href = getBlockchainUrl(block.hash);
+            }
+            else if (data.error)
+            {
+              wrongSearchAlert();
+            }
+          }
+        });
+      }
 
-    // alert("checkTxKey()");
+      function GetSearchBlock()
+      {
+        var block, xhrGetSearchBlock;
+        if (xhrGetSearchBlock)
+        {
+          xhrGetSearchBlock.abort();
+        }
 
-		if (xhrCheckTransactionByKey)
+        xhrGetSearchBlock = $.ajax({
+          url: api + '/json_rpc',
+          method: "POST",
+          data: JSON.stringify({
+            jsonrpc:"2.0",
+            id: "GetSearchBlock",
+            method:"get_block",
+            params: {
+               hash: text
+            }
+          }),
+          dataType: 'json',
+          cache: 'false',
+          success: function(data) {
+            if (data.result)
+            {
+              block = data.result.block;
+              sessionStorage.setItem('searchBlock', JSON.stringify(block));
+              window.location.href = getBlockchainUrl(block.hash);
+            }
+            else if (data.error)
+            {
+              $.ajax({
+                url: api + '/json_rpc',
+                method: "POST",
+                data: JSON.stringify({
+                  jsonrpc:"2.0",
+                  id: "test",
+                  method:"get_transaction",
+                  params: {
+                    hash: text
+                  }
+                }),
+                dataType: 'json',
+                cache: 'false',
+                success: function(data) {
+                  if (data.result)
+                  {
+                    sessionStorage.setItem('searchTransaction', JSON.stringify(data.result));
+                    window.location.href = transactionExplorer.replace('{id}', text);
+                  }
+                  else if (data.error)
+                  {
+                    xhrGetTsx =  $.ajax({
+                      url: api + '/json_rpc',
+                      method: "POST",
+                      data: JSON.stringify({
+                        jsonrpc:"2.0",
+                        id: "test",
+                        method:"get_transactions_by_payment_id",
+                        params: {
+                          payment_id: text
+                        }
+                      }),
+                      dataType: 'json',
+                      cache: 'false',
+                      success: function(data) {
+                        if (data.result)
+                        {
+                          txsByPaymentId = data.result.transactions;
+                          sessionStorage.setItem('txsByPaymentId', JSON.stringify(txsByPaymentId));
+                          window.location.href = paymentIdExplorer.replace('{id}', text);
+                        }
+                        else if (data.error)
+                        {
+                          $('#page').after(
+                            '<div class="alert alert-warning alert-dismissable fade in" style="position: fixed; right: 50px; top: 50px;">'+
+                              '<button type="button" class="close" ' + 
+                                  'data-dismiss="alert" aria-hidden="true">' + 
+                                '&times;' + 
+                              '</button>' + 
+                              'We could not find anything.' + 
+                             '</div>');
+                        }
+                      }
+                    });
+                  }
+                }
+              });
+            }
+          }  
+        });
+      }
+
+      if ( text.length < 64 )
+      {
+        GetSearchBlockbyHeight();
+      }
+      else if ( text.length == 64 )
+      {
+        GetSearchBlock();
+      }
+      else
+      {
+        wrongSearchAlert();
+      }
+
+      e.preventDefault();
+
+    });
+
+    function wrongSearchAlert()
     {
-      xhrCheckTransactionByKey.abort();
+      $('#page').after(
+        '<div class="alert alert-danger alert-dismissable fade in" style="position: fixed; right: 50px; top: 50px;">'+
+        '<button type="button" class="close" ' + 
+        'data-dismiss="alert" aria-hidden="true">' + 
+        '&times;' + 
+        '</button>' + 
+        '<strong>Wrong search query!</strong><br /> Please enter block height or hash, transaction hash, or payment id.' + 
+        '</div>');
     }
 
-		xhrCheckTransactionByKey = $.ajax({
-			url: api + '/json_rpc',
-			method: "POST",
-			data: JSON.stringify({
-				jsonrpc:"2.0",
-				id: "test",
-				method:"check_payment",
-				params: {
-					txid: transactionHash.val(),
-					txkey: privateKey.val(),
-					address: publicAddress.val()
-				}
-			}),
-			dataType: 'json',
-			cache: 'false',
-			success: function(data){
-			  if (data.error) {
-				wrongParamAlert(data.error.message);
-			  } else {
-				var result = data.result;
-
-        // console.log(result);
-
-        $("#receiverAddress").html(publicAddress.val());
-
-				$("#receivedAmount").html(getReadableCoins(result.amount,12));
-				
-				var outputResults = result.outputs;
-				for (var i = 0; i < outputResults.length; i++){
-					$('#outputs_rows tr').each(function() {
-						$this = $(this);
-						if ($this.attr('data-k_image') === outputResults[i].target.data.key) {
-							$this.addClass("success");
-						}
-					});				
-				}
-				$("#check_result").show();
-			  }
-			}
-		});
-	}
-	
-	function renderTransaction(transaction)
-  {
-    // alert("renderTransaction()");
-    
-    var details = transaction.txDetails;
-    inputs = transaction.tx.vin;
-    outputs = transaction.tx.vout;
-    block = transaction.block;
-
-    // updateText('transactionHash', details.hash);
-
-    // if (block.hash){
-    //   $('#confirmations').show();
-    //   updateText('transaction.confirmations', lastStats.height - block.height);
-    //   updateText('transaction.timestamp', formatDate(block.timestamp));
-    //   $(".transaction-timeago").timeago('update', new Date(block.timestamp * 1000).toISOString());
-    // }
-
-    // updateText('transaction.amount_out', getReadableCoins(details.amount_out));
-    // updateText('transaction.fee', getReadableCoins(details.fee));
-    // updateText('transaction.mixin', details.mixin);
-
-    // if (!details.mixin)
-    // {
-    //     $('#div_transaction_mixin').hide();
-    // }
-    // updateText('transaction.paymentId', details.paymentId);
-    // updateText('transaction.paymentIdDecifer', hex2a(details.paymentId));
-    // if (!details.paymentId)
-    //     $('#div_transaction_paymentId').hide();
-    // updateText('transaction.size', formatBytes(parseInt(details.size)));
-
-    // if (!block.hash){
-    //   $('#tx_block').hide();
-    //   $('#tx_unconfirmed').show();
-    // }
-
-    // updateText('block.hash', block.hash);
-    // updateText('block.height', block.height);
-    // updateText('block.timestamp', formatDate(block.timestamp));
-    
-    // renderInputs(inputs);
-    // renderOutputs(outputs);
-	}
-
-  function getInputCells(input){
-    return '<td>' + getReadableCoins(input.value.amount) + '</td>' +
-        '<td>' + input.value.k_image + '</td>' +
-        '<td>' + input.value.key_offsets + '</td>';
-  }
-
-
-  function getInputRowElement(input, jsonString){
-
-      var row = document.createElement('tr');
-      row.setAttribute('data-json', jsonString);
-      row.setAttribute('data-k_image', input.value.k_image);
-      row.setAttribute('data-key_offsets', input.value.key_offsets);
-      row.setAttribute('id', 'inputRow' + input.value.k_image);
-
-      row.innerHTML = getInputCells(input);
-
-      return row;
-  }
-
-  function renderInputs(inputResults){
-
-      var $inputsRows = $('#inputs_rows');
-
-      for (var i = 0; i < inputResults.length; i++){
-  
-          var input = inputResults[i];
-  
-          if (!input.value.amount)
-              continue;
-      
-          var inputJson = JSON.stringify(input);
-    
-          var existingRow = document.getElementById('inputRow' + input.value.k_image);
-
-          if (existingRow && existingRow.getAttribute('data-json') !== inputJson){
-              $(existingRow).replaceWith(getInputRowElement(input, inputJson));
-          }
-          else if (!existingRow){
-
-              var inputElement = getInputRowElement(input, inputJson);
-              $inputsRows.append(inputElement);
-          }
-    
+    $('#txt_search').keyup(function(e) {
+      if (e.keyCode === 13)
+      {
+        $('#btn_search').click();
       }
-  
-  updateText('inputs_count', document.querySelectorAll('#inputs_rows tr').length);
-  }
+    });
 
+    </script>
 
-  function getOutputCells(output){
-      return '<td>' + getReadableCoins(output.amount) + '</td>' +
-          '<td>' + output.target.data.key + '</td>';
-  }
+    <script>
+      jQuery(function($) {
+        $(document).ready(function() {
+          $(window).scroll(function() {
+            if ($(this).scrollTop() > 500)
+            {
+              $('.scrollup').fadeIn();
+            }
+            else
+            {
+              $('.scrollup').fadeOut();
+            }
+          }); 
 
+          $('.scrollup').click(function() {
+            $("html, body").animate({ scrollTop: 0 }, 600);
+            return false;
+          });
 
-  function getOutputRowElement(output, jsonString){
+          $('.scrollup').css('opacity','0.3');
 
-      var row = document.createElement('tr');
-      row.setAttribute('data-json', jsonString);
-      row.setAttribute('data-k_image', output.target.data.key);
-      row.setAttribute('id', 'outputRow' + output.target.data.key);
+          $('.scrollup').hover(function() {
+            $(this).stop().animate({opacity: 0.9}, 400);
+           }, function() {
+            $(this).stop().animate({opacity: 0.3}, 400);
+          });
 
-      row.innerHTML = getOutputCells(output);
+        });
+      });
+    </script>
 
-      return row;
-  }
+    <script>
+      // Check transaction key
 
-  function renderOutputs(outputResults){
+      var xhrGetTransaction, xhrCheckTransactionByKey, xhrCheckTransactionByViewKey, transaction;
+      var transactionHash = $("#transaction_hash");
+      var privateKey = $("#private_key");
+      var publicAddress = $("#public_address");
 
-      var $outputsRows = $('#outputs_rows');
+      currentPage = {
+        destroy: function(){
+          if (xhrGetTransaction) xhrGetTransaction.abort();
+          if (xhrCheckTransactionByKey) xhrCheckTransactionByKey.abort();
+          if (xhrCheckTransactionByViewKey) xhrCheckTransactionByViewKey.abort();
+        },
+        init: function(){
+        },
+        update: function(){
+        }
+      };
 
-      for (var i = 0; i < outputResults.length; i++){
+      $("#check_result").hide();
 
-          var output = outputResults[i];
+      $("#check_transaction").click(function() {
 
-          var outputJson = JSON.stringify(output);
-    
-          var existingRow = document.getElementById('outputRow' + output.target.data.key);
+        // alert("check_transaction");
 
-          if (existingRow && existingRow.getAttribute('data-json') !== outputJson){
-              $(existingRow).replaceWith(getOutputRowElement(output, outputJson));
+        $("#check_result").hide();
+        $('#inputs_rows').empty();
+        $('#outputs_rows').empty();
+        $('#receivedAmount').empty();
+        $('#transactionHash').empty();
+
+        if(!transactionHash.val() || !privateKey.val() || !publicAddress.val())
+        {
+          wrongParamAlert("Fill all fields!");
+          return;
+        }
+
+        getTransaction();
+
+      });
+
+      function getTransaction()
+      {
+
+        // alert("getTransaction()");
+
+        if (xhrGetTransaction)
+        {
+          xhrGetTransaction.abort();
+        }
+
+        xhrGetTransaction = $.ajax({
+          url: api + '/json_rpc',
+          method: "POST",
+          data: JSON.stringify({
+            jsonrpc:"2.0",
+            id: "test",
+            method:"get_transaction",
+            params: {
+              hash: transactionHash.val()
+            }
+          }),
+          dataType: 'json',
+          cache: 'false',
+          success: function(data)
+          {
+            // console.log(data);
+
+            if (data.error)
+            {
+              wrongParamAlert(data.error.message);
+            }
+            else 
+            {
+              // alert("no error");
+
+              var tx = data.result;
+              renderTransaction(tx);
+              checkTxKey();
+            }
           }
-          else if (!existingRow){
-
-              var outputElement = getOutputRowElement(output, outputJson);
-              $outputsRows.append(outputElement);
-          }
-    
+        });
       }
-  
-  updateText('outputs_count', document.querySelectorAll('#outputs_rows tr').length);
-  }
-	
-	function wrongParamAlert(message) {
-	$('#page').after(
-		'<div class="alert alert-danger alert-dismissable fade in" style="position: fixed; right: 50px; top: 50px;">'+
-		'<button type="button" class="close" ' + 
-		'data-dismiss="alert" aria-hidden="true">' + 
-		'&times;' + 
-		'</button>' + 
-		'<strong>' + message + '</strong><br />' +
-		'</div>');
-	}
-</script> 
-</body>
+
+      function checkTxKey(){
+
+        // alert("checkTxKey()");
+
+        if (xhrCheckTransactionByKey)
+        {
+          xhrCheckTransactionByKey.abort();
+        }
+
+        xhrCheckTransactionByKey = $.ajax({
+          url: api + '/json_rpc',
+          method: "POST",
+          data: JSON.stringify({
+            jsonrpc:"2.0",
+            id: "test",
+            method:"check_payment",
+            params: {
+              txid: transactionHash.val(),
+              txkey: privateKey.val(),
+              address: publicAddress.val()
+            }
+          }),
+          dataType: 'json',
+          cache: 'false',
+          success: function(data){
+            if (data.error) {
+            wrongParamAlert(data.error.message);
+            } else {
+            var result = data.result;
+
+            // console.log(result);
+
+            $("#receiverAddress").html(publicAddress.val());
+
+            $("#receivedAmount").html(getReadableCoins(result.amount,12));
+
+            var outputResults = result.outputs;
+            for (var i = 0; i < outputResults.length; i++){
+              $('#outputs_rows tr').each(function() {
+                $this = $(this);
+                if ($this.attr('data-k_image') === outputResults[i].target.data.key) {
+                  $this.addClass("success");
+                }
+              });
+            }
+            $("#check_result").show();
+            }
+          }
+        });
+      }
+
+      function renderTransaction(transaction)
+      {
+        // alert("renderTransaction()");
+
+        var details = transaction.txDetails;
+        inputs = transaction.tx.vin;
+        outputs = transaction.tx.vout;
+        block = transaction.block;
+
+        // updateText('transactionHash', details.hash);
+
+        // if (block.hash){
+        //   $('#confirmations').show();
+        //   updateText('transaction.confirmations', lastStats.height - block.height);
+        //   updateText('transaction.timestamp', formatDate(block.timestamp));
+        //   $(".transaction-timeago").timeago('update', new Date(block.timestamp * 1000).toISOString());
+        // }
+
+        // updateText('transaction.amount_out', getReadableCoins(details.amount_out));
+        // updateText('transaction.fee', getReadableCoins(details.fee));
+        // updateText('transaction.mixin', details.mixin);
+
+        // if (!details.mixin)
+        // {
+        //     $('#div_transaction_mixin').hide();
+        // }
+        // updateText('transaction.paymentId', details.paymentId);
+        // updateText('transaction.paymentIdDecifer', hex2a(details.paymentId));
+        // if (!details.paymentId)
+        //     $('#div_transaction_paymentId').hide();
+        // updateText('transaction.size', formatBytes(parseInt(details.size)));
+
+        // if (!block.hash){
+        //   $('#tx_block').hide();
+        //   $('#tx_unconfirmed').show();
+        // }
+
+        // updateText('block.hash', block.hash);
+        // updateText('block.height', block.height);
+        // updateText('block.timestamp', formatDate(block.timestamp));
+
+        // renderInputs(inputs);
+        // renderOutputs(outputs);
+      }
+
+      function getInputCells(input){
+        return '<td>' + getReadableCoins(input.value.amount) + '</td>' +
+            '<td>' + input.value.k_image + '</td>' +
+            '<td>' + input.value.key_offsets + '</td>';
+      }
+
+
+      function getInputRowElement(input, jsonString){
+
+          var row = document.createElement('tr');
+          row.setAttribute('data-json', jsonString);
+          row.setAttribute('data-k_image', input.value.k_image);
+          row.setAttribute('data-key_offsets', input.value.key_offsets);
+          row.setAttribute('id', 'inputRow' + input.value.k_image);
+
+          row.innerHTML = getInputCells(input);
+
+          return row;
+      }
+
+      function renderInputs(inputResults){
+
+          var $inputsRows = $('#inputs_rows');
+
+          for (var i = 0; i < inputResults.length; i++){
+
+              var input = inputResults[i];
+
+              if (!input.value.amount)
+                  continue;
+
+              var inputJson = JSON.stringify(input);
+
+              var existingRow = document.getElementById('inputRow' + input.value.k_image);
+
+              if (existingRow && existingRow.getAttribute('data-json') !== inputJson){
+                  $(existingRow).replaceWith(getInputRowElement(input, inputJson));
+              }
+              else if (!existingRow){
+
+                  var inputElement = getInputRowElement(input, inputJson);
+                  $inputsRows.append(inputElement);
+              }
+
+          }
+
+      updateText('inputs_count', document.querySelectorAll('#inputs_rows tr').length);
+      }
+
+
+      function getOutputCells(output){
+          return '<td>' + getReadableCoins(output.amount) + '</td>' +
+              '<td>' + output.target.data.key + '</td>';
+      }
+
+
+      function getOutputRowElement(output, jsonString){
+
+          var row = document.createElement('tr');
+          row.setAttribute('data-json', jsonString);
+          row.setAttribute('data-k_image', output.target.data.key);
+          row.setAttribute('id', 'outputRow' + output.target.data.key);
+
+          row.innerHTML = getOutputCells(output);
+
+          return row;
+      }
+
+      function renderOutputs(outputResults){
+
+          var $outputsRows = $('#outputs_rows');
+
+          for (var i = 0; i < outputResults.length; i++){
+
+              var output = outputResults[i];
+
+              var outputJson = JSON.stringify(output);
+
+              var existingRow = document.getElementById('outputRow' + output.target.data.key);
+
+              if (existingRow && existingRow.getAttribute('data-json') !== outputJson){
+                  $(existingRow).replaceWith(getOutputRowElement(output, outputJson));
+              }
+              else if (!existingRow){
+
+                  var outputElement = getOutputRowElement(output, outputJson);
+                  $outputsRows.append(outputElement);
+              }
+
+          }
+
+      updateText('outputs_count', document.querySelectorAll('#outputs_rows tr').length);
+      }
+
+      function wrongParamAlert(message) {
+      $('#page').after(
+        '<div class="alert alert-danger alert-dismissable fade in" style="position: fixed; right: 50px; top: 50px;">'+
+        '<button type="button" class="close" ' + 
+        'data-dismiss="alert" aria-hidden="true">' + 
+        '&times;' + 
+        '</button>' + 
+        '<strong>' + message + '</strong><br />' +
+        '</div>');
+      }
+    </script> 
+  </body>
 </html>
