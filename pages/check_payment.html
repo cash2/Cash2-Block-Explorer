@@ -128,9 +128,9 @@
 
   currentPage = {
       destroy: function(){
-    if (xhrGetTransaction) xhrGetTransaction.abort();
-    if (xhrCheckTransactionByKey) xhrCheckTransactionByKey.abort();
-    if (xhrCheckTransactionByViewKey) xhrCheckTransactionByViewKey.abort();
+        if (xhrGetTransaction) xhrGetTransaction.abort();
+        if (xhrCheckTransactionByKey) xhrCheckTransactionByKey.abort();
+        if (xhrCheckTransactionByViewKey) xhrCheckTransactionByViewKey.abort();
       },
       init: function(){
       },
@@ -163,7 +163,7 @@
 			data: JSON.stringify({
 				jsonrpc:"2.0",
 				id: "test",
-				method:"get_transaction",
+				method:"f_transaction_json",
 				params: {
 					hash: transactionHash.val()
 				}
@@ -196,11 +196,11 @@
 			data: JSON.stringify({
 				jsonrpc:"2.0",
 				id: "test",
-				method:"check_payment",
+				method:"check_tx_key",
 				params: {
-					transaction_id: transactionHash.val(),
-					transaction_private_key: privateKey.val(),
-					receiver_address: publicAddress.val()
+					txid: transactionHash.val(),
+					txkey: privateKey.val(),
+					address: publicAddress.val()
 				}
 			}),
 			dataType: 'json',
@@ -228,9 +228,9 @@
 	}
 	
 	function renderTransaction(transaction){
-				var details = transaction.transaction_details;
-                inputs = transaction.transaction.vin;
-                outputs = transaction.transaction.vout;
+				var details = transaction.txDetails;
+                inputs = transaction.tx.vin;
+                outputs = transaction.tx.vout;
                 block = transaction.block;
 				
                 updateText('transactionHash', details.hash);
@@ -245,9 +245,9 @@
                 updateText('transaction.mixin', details.mixin);
                 if (!details.mixin)
                     $('#div_transaction_mixin').hide();
-                updateText('transaction.paymentId', details.payment_id);
-				updateText('transaction.paymentIdDecifer', hex2a(details.payment_id));
-                if (!details.payment_id)
+                updateText('transaction.paymentId', details.paymentId);
+				updateText('transaction.paymentIdDecifer', hex2a(details.paymentId));
+                if (!details.paymentId)
                     $('#div_transaction_paymentId').hide();
                 updateText('transaction.size', formatBytes(parseInt(details.size)));
 

@@ -491,7 +491,7 @@
       function fetchLiveStats()
       {
         $.ajax({
-          url: api + '/get_info',
+          url: api + '/getinfo',
           dataType: 'json',
           type: 'GET',
           cache: 'false'
@@ -517,10 +517,10 @@
         {
           $('#node_connection').html('Online').addClass('text-success').removeClass('text-danger');
           $('#node_height').html(parseInt(lastStats['height']));
-          $('#node_block').html(parseInt(lastStats['last_known_block_height']));
+          $('#node_block').html(parseInt(lastStats['last_known_block_index']));
           $('#node_diff').html(parseInt(lastStats['difficulty']));
-          $('#node_alt').html(parseInt(lastStats['orphan_blocks_count']));
-          $('#node_rpc').html(parseInt(lastStats['connections_count']));
+          $('#node_alt').html(parseInt(lastStats['alt_blocks_count']));
+          $('#node_rpc').html(parseInt(lastStats['rpc_connections_count']));
           $('#node_inc').html(parseInt(lastStats['incoming_connections_count']));
           $('#node_out').html(parseInt(lastStats['outgoing_connections_count']));
           $('#node_white').html(parseInt(lastStats['white_peerlist_size']));
@@ -581,7 +581,7 @@
       }
 
       $(function() {
-        $.get(api + '/get_info', function(data) {
+        $.get(api + '/getinfo', function(data) {
           try
           {
             lastStats = JSON.parse(data);
@@ -637,7 +637,7 @@
           data: JSON.stringify({
             jsonrpc:"2.0",
             id: "blockbyheight",
-            method:"get_block_header_by_height",
+            method:"getblockheaderbyheight",
             params: {
                height: parseInt(text)
             }
@@ -672,7 +672,7 @@
           data: JSON.stringify({
             jsonrpc:"2.0",
             id: "GetSearchBlock",
-            method:"get_block",
+            method:"f_block_json",
             params: {
                hash: text
             }
@@ -694,7 +694,7 @@
                 data: JSON.stringify({
                   jsonrpc:"2.0",
                   id: "test",
-                  method:"get_transaction",
+                  method:"f_transaction_json",
                   params: {
                     hash: text
                   }
@@ -715,7 +715,7 @@
                       data: JSON.stringify({
                         jsonrpc:"2.0",
                         id: "test",
-                        method:"get_transactions_by_payment_id",
+                        method:"k_transactions_by_payment_id",
                         params: {
                           payment_id: text
                         }
@@ -877,7 +877,7 @@
           data: JSON.stringify({
             jsonrpc:"2.0",
             id: "test",
-            method:"get_transaction",
+            method:"f_transaction_json",
             params: {
               hash: transactionHash.val()
             }
