@@ -334,7 +334,7 @@
     update: function() {
       renderLastBlock();
       updateText('networkHeight', lastStats.height.toString());
-      updateText('networkTransactions', lastStats.total_transactions_count.toString());
+      updateText('networkTransactions', lastStats.tx_count.toString());
       updateText('networkHashrate', getReadableHashRateString(lastStats.difficulty / blockTargetInterval));
       updateText('networkDifficulty', getReadableDifficultyString(lastStats.difficulty, 2).toString());
       $("time.timeago").timeago();
@@ -366,7 +366,7 @@
       data: JSON.stringify({
         jsonrpc:"2.0",
         id: "test",
-        method:"get_last_block_header",
+        method:"getlastblockheader",
         params: {}
       }),
       dataType: 'json',
@@ -379,7 +379,7 @@
           data: JSON.stringify({
             jsonrpc:"2.0",
             id: "test",
-            method:"get_block",
+            method:"f_block_json",
             params: {
                 hash: last_block_hash
             }
@@ -388,9 +388,9 @@
           cache: 'false',
           success: function(data) {
             block = data.result.block;
-            updateText('totalCoins', getReadableCoins(block.already_generated_coins, 0));
-            updateText('emissionPercent', (block.already_generated_coins / 15000000000000000 * 100).toFixed(2));
-            updateText('currentReward', getReadableCoins(block.base_reward, 9));
+            updateText('totalCoins', getReadableCoins(block.alreadyGeneratedCoins, 0));
+            updateText('emissionPercent', (block.alreadyGeneratedCoins / 15000000000000000 * 100).toFixed(2));
+            updateText('currentReward', getReadableCoins(block.baseReward, 9));
           }
         });
       }
@@ -410,7 +410,7 @@
       data: JSON.stringify({
         jsonrpc:"2.0",
         id: "test",
-        method:"get_blocks",
+        method:"f_blocks_list_json",
         params: {
             height: $('#blocks_rows').children().last().data('height')
         }
@@ -445,7 +445,7 @@
       data: JSON.stringify({
         jsonrpc:"2.0",
         id: "test",
-        method:"get_blocks",
+        method:"f_blocks_list_json",
         params: {
           height: openHeight
         }
@@ -493,7 +493,7 @@
       data: JSON.stringify({
         jsonrpc:"2.0",
         id: "test",
-        method:"get_blocks",
+        method:"f_blocks_list_json",
         params: {
             height: openHeight
         }
@@ -567,7 +567,7 @@
       data: JSON.stringify({
         jsonrpc:"2.0",
         id: "test",
-        method:"get_blocks",
+        method:"f_blocks_list_json",
         params: {
           height: loadHeight
         }
@@ -602,8 +602,8 @@
 
     Difficulties.push(parseInt(blockDifficulty));
     Blocks.push(parseInt(block.height));
-    Txses.push(parseInt(block.transaction_count));
-    Sizes.push(parseInt(block.size));
+    Txses.push(parseInt(block.tx_count));
+    Sizes.push(parseInt(block.cumul_size));
     Timestamps.push(dateTime);
     time_stamps.push(block.timestamp);
 
@@ -693,7 +693,7 @@
       data: JSON.stringify({
         jsonrpc: "2.0",
         id: "test",
-        method: "get_mempool",
+        method: "f_mempool_json",
         params: {}
       }),
       dataType: 'json',
@@ -721,14 +721,14 @@
               
             var row = document.createElement('tr');
             var columns =
-              '<td>' + formatDate(tx.receive_time) + '</td>' +
+              '<td>' + formatDate(tx.receiveTime) + '</td>' +
               '<td>' + getReadableCoins(tx.amount_out, 4, true) + '</td>' +
               // '<td>' + getReadableCoins(tx.fee, 4, true) + '</td>' +
               // '<td>' + formatBytes(parseInt(tx.size)) + '</td>' +
               '<td>' + formatPaymentLink(tx.hash) + '</td>';
             row.innerHTML = columns;
             $(txsRows).append(row);
-            $(row).find('.mtx-ago').timeago('update', new Date(tx.receive_time * 1000).toISOString());
+            $(row).find('.mtx-ago').timeago('update', new Date(tx.receiveTime * 1000).toISOString());
             
             txcount = txcount + 1;
             totalAmount = tx.amount_out + totalAmount;
@@ -954,8 +954,8 @@
       var row = $(brows[i]);
       var label = row.data("json").height;
       var diff  = row.data("json").difficulty;
-      var txses = row.data("json").total_transactions_count;
-      var size  = row.data("json").size;
+      var txses = row.data("json").tx_count;
+      var size  = row.data("json").cumul_size;
       var time  = row.attr('data-dt');
 
       labels.push(label);
@@ -1074,7 +1074,7 @@
 			data: JSON.stringify({
 				jsonrpc:"2.0",
 				id: "test",
-				method:"get_transaction",
+				method:"f_transaction_json",
 				params: {
 					hash: transactionHash.val()
 				}
@@ -1113,11 +1113,11 @@
 			data: JSON.stringify({
 				jsonrpc:"2.0",
 				id: "test",
-				method:"check_payment",
+				method:"check_tx_key",
 				params: {
-					transaction_id: transactionHash.val(),
-					transaction_private_key: privateKey.val(),
-					receiver_address: publicAddress.val()
+					txid: transactionHash.val(),
+					txkey: privateKey.val(),
+					address: publicAddress.val()
 				}
 			}),
 			dataType: 'json',
@@ -1157,9 +1157,9 @@
 	
 	function renderTransaction(transaction)
   {
-    var details = transaction.transaction_details;
-    inputs = transaction.transaction.vin;
-    outputs = transaction.transaction.vout;
+    var details = transaction.txDetails;
+    inputs = transaction.tx.vin;
+    outputs = transaction.tx.vout;
     block = transaction.block;
 
     // updateText('transactionHash', details.hash);

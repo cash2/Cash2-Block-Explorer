@@ -742,7 +742,7 @@
       data: JSON.stringify({
         jsonrpc:"2.0",
         id: "test",
-        method:"get_blocks",
+        method:"f_blocks_list_json",
         params: {
           height: lastStats.height - 1
         }
@@ -794,7 +794,7 @@
       data: JSON.stringify({
         jsonrpc:"2.0",
         id: "test",
-        method:"get_last_block_header",
+        method:"getlastblockheader",
         params: {}
       }),
       dataType: 'json',
@@ -807,7 +807,7 @@
           data: JSON.stringify({
             jsonrpc:"2.0",
             id: "test",
-            method:"get_block",
+            method:"f_block_json",
             params: {
                 hash: last_block_hash
             }
@@ -816,7 +816,7 @@
           cache: 'false',
           success: function(data) {
             var block = data.result.block;
-            lastReward = parseInt(block.base_reward);
+            lastReward = parseInt(block.baseReward);
           }
         });
       }

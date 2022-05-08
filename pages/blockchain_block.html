@@ -140,7 +140,7 @@
         data: JSON.stringify({
           jsonrpc:"2.0",
           id: "test",
-          method:"get_block",
+          method:"f_block_json",
           params: {
             hash: urlParam('hash')
           }
@@ -176,16 +176,16 @@
     updateText('block.difficulty', getReadableDifficultyString(blockDifficulty, 2).toString());
     // updateText('block.orphan', block.orphan_status ? "Yes" : "No");
     updateText('block.transactions', block.transactions.length);
-    updateText('block.transactionsSize', formatBytes(parseInt(block.transactions_size)));
-    updateText('block.blockSize', formatBytes(parseInt(block.size)));
+    updateText('block.transactionsSize', formatBytes(parseInt(block.transactionsCumulativeSize)));
+    updateText('block.blockSize', formatBytes(parseInt(block.blockSize)));
     // updateText('block.currentTxsMedian', formatBytes(parseInt(block.sizeMedian)));
     // updateText('block.effectiveTxsMedian', formatBytes(parseInt(block.effectiveSizeMedian)));
     // updateText('block.rewardPenalty', block.penalty*100 + "%");
-    updateText('block.baseReward', getReadableCoins(block.base_reward));
+    updateText('block.baseReward', getReadableCoins(block.baseReward));
     // updateText('block.transactionsFee', getReadableCoins(block.totalFeeAmount));
-    updateText('block.reward', getReadableCoins(block.total_reward));
-    updateText('block.totalCoins', getReadableCoins(block.already_generated_coins));
-    updateText('block.totalTransactions', block.already_generated_transactions);
+    updateText('block.reward', getReadableCoins(block.reward));
+    updateText('block.totalCoins', getReadableCoins(block.alreadyGeneratedCoins));
+    updateText('block.totalTransactions', block.alreadyGeneratedTransactions);
     renderTransactions(block.transactions);
   
     makePrevBlockLink(block.prev_hash);

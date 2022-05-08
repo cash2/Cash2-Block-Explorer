@@ -153,7 +153,7 @@
         data: JSON.stringify({
           jsonrpc:"2.0",
           id: "test",
-          method:"get_transaction",
+          method:"f_transaction_json",
           params: {
             hash: urlParam('hash')
           }
@@ -171,9 +171,9 @@
   }
 
   function renderTransaction(transaction) {
-    var details = transaction.transaction_details;
-    var inputs = transaction.transaction.vin;
-    var outputs = transaction.transaction.vout;
+    var details = transaction.txDetails;
+    var inputs = transaction.tx.vin;
+    var outputs = transaction.tx.vout;
     var block = transaction.block;
     
     updateText('transaction.hash', details.hash);
@@ -194,8 +194,8 @@
     //     $('#div_transaction_mixin').hide();
     // }
 
-    updateText('transaction.paymentId', details.payment_id);
-    updateText('transaction.paymentIdDecifer', hex2a(details.payment_id));
+    updateText('transaction.paymentId', details.paymentId);
+    updateText('transaction.paymentIdDecifer', hex2a(details.paymentId));
 
     if (!details.payment_id)
     {
